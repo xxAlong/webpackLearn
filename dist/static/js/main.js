@@ -1,2 +1,2 @@
-!function(){"use strict";console.log(2-1),console.log(function(){for(var n=arguments.length,o=new Array(n),e=0;e<n;e++)o[e]=arguments[e];return o.reduce(((n,o)=>n+o),0)}(1,2,3,4)),console.log(function(n,o){return n*o}(3,3))}();
+!function(){"use strict";console.log(2-1),console.log(function(){for(var e=arguments.length,o=new Array(e),r=0;r<e;r++)o[r]=arguments[r];return o.reduce(((e,o)=>e+o),0)}(1,2,3,4)),console.log(function(e,o){return e*o}(3,3));Promise.resolve().then((()=>{console.log("hello promise")})),"serviceWorker"in navigator&&window.addEventListener("load",(()=>{navigator.serviceWorker.register("/service-worker.js").then((e=>{console.log("SW registered: ",e)})).catch((e=>{console.log("SW registration failed: ",e)}))}))}();
 //# sourceMappingURL=main.js.map

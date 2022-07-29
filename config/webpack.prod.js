@@ -7,7 +7,8 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const threads = os.cpus().length;//CPU核数
 const TerserPlugin = require("terser-webpack-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
-
+const PreloadWebpackPlugin = require("@vue/preload-webpack-plugin");
+const WorkboxPlugin = require("workbox-webpack-plugin");
 
 //用来处理获取样式的loader
 function getStyleLoader(pre) {
@@ -129,7 +130,11 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'static/css/main.css'
         }),
-
+        new PreloadWebpackPlugin({
+            rel: "preload", // preload兼容性更好
+            as: "script",
+            // rel: 'prefetch' // prefetch兼容性更差
+        }),
 
     ],
     optimization: {
@@ -168,6 +173,12 @@ module.exports = {
                         ],
                     },
                 },
+            }),
+            new WorkboxPlugin.GenerateSW({
+                // 这些选项帮助快速启用 ServiceWorkers
+                // 不允许遗留任何“旧的” ServiceWorkers
+                clientsClaim: true,
+                skipWaiting: true,
             }),
         ],
     },
